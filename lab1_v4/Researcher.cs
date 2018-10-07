@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace lab1_v4
 {
@@ -36,7 +32,7 @@ namespace lab1_v4
 
         public void RemoveProjectAt(int index)
         {
-            this.projects.RemoveAt(index);
+            projects.RemoveAt(index);
         }
 
         public string ToShortString()
