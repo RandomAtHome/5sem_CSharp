@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace lab1_v4 {
-    public class Project
+    public class Project : IComparable<Project>
     {
         public string theme { get; set; }
         public ProjectType type { get; set; }
@@ -30,7 +30,13 @@ namespace lab1_v4 {
             if (Object.ReferenceEquals(obj, null))
                 return false;
             return this.date.Equals(((Project)obj).date) && this.theme.Equals(((Project)obj).theme) && this.type.Equals(((Project)obj).type); 
-        } 
+        }
+
+        int IComparable<Project>.CompareTo(Project other)
+        {
+            throw new NotImplementedException();
+        }
+
         public static bool operator ==(Project a, Project b)
         {
             return Object.ReferenceEquals(a, b) || (!Object.ReferenceEquals(a, null) && a.Equals(b));

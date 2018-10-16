@@ -2,7 +2,7 @@
 
 namespace lab1_v4
 {
-    class InternationalProject : Project
+    class InternationalProject : Project, IComparable<InternationalProject>
     {
         public string country_host { set; get; }
         public int participant_count { set; get; }
@@ -16,6 +16,11 @@ namespace lab1_v4
         {
             string delim = "\n";
             return base.ToString() + delim + "Country host: " + country_host + delim + "Total participants: " + participant_count;
+        }
+
+        int IComparable<InternationalProject>.CompareTo(InternationalProject other)
+        {
+            return participant_count - other.participant_count;
         }
     }
 }
