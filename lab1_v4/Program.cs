@@ -13,15 +13,28 @@ namespace lab1_v4
             researcherList.AddDefaults();
             Console.WriteLine(researcherList);
             Console.WriteLine();
+            Console.ReadKey();
             Console.WriteLine("(1) Get earliest worldwide project ending");
             Console.WriteLine(researcherList.EarliestWWEDate);
             Console.WriteLine();
+            Console.ReadKey();
             Console.WriteLine("(2) Get reference for the earliest project");
             Console.WriteLine(researcherList.EarliestProj);
             Console.WriteLine();
+            Console.ReadKey();
             Console.WriteLine("(3) Get enumerable in descending order for all local projects");
             foreach (LocalProject localProject in researcherList.LProjectsDecreasingDuration)
-                Console.WriteLine(localProject);
+                Console.WriteLine(localProject + "\n");
+            Console.WriteLine();
+            Console.ReadKey();
+            Console.WriteLine("(4) Get enumerable grouping for international projects by participants count");
+            foreach (var group in researcherList.GroupByParticipantsCount)
+            {
+                Console.WriteLine("Participant count: " + group.Key + "\n");
+                foreach (var project in group)
+                    Console.WriteLine(project + "\n");
+                Console.WriteLine();
+            }
             Console.WriteLine("\n");
             Console.ReadKey();
             //empty list showcase
@@ -37,6 +50,14 @@ namespace lab1_v4
             Console.WriteLine("(3) Get enumerable in descending order for all local projects");
             foreach (LocalProject localProject in emptyList.LProjectsDecreasingDuration)
                 Console.WriteLine(localProject);
+            Console.WriteLine("(4) Get enumerable grouping for international projects by participants count");
+            foreach (var group in emptyList.GroupByParticipantsCount)
+            {
+                Console.WriteLine("Participant count: " + group.Key + "\n");
+                foreach (var project in group)
+                    Console.WriteLine(project);
+                Console.WriteLine();
+            }
             Console.ReadKey();
         }
     }

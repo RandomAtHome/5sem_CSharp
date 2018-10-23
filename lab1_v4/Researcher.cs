@@ -50,7 +50,7 @@ namespace lab1_v4
             }
             foreach (Project project in projects)
             {
-                result += project + "\n";
+                result += project + "\n\n";
             }
             return result;
         }

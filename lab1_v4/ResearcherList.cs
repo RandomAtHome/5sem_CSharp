@@ -39,14 +39,10 @@ namespace lab1_v4
                                                                         orderby ((LocalProject)project).duration descending
                                                                         select (LocalProject)project;
 
-        public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount
-        {
-            get
-            {
-                //TODO: fourth functionality
-                throw new NotImplementedException();
-            }
-        }
+        public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount => from researcher in researchers
+                                                                                             from project in researcher.projects
+                                                                                             where project is InternationalProject
+                                                                                             group (project as InternationalProject) by (project as InternationalProject).participant_count;
 
         public IEnumerable<Project> UniqueProjects
         {
@@ -73,7 +69,7 @@ namespace lab1_v4
             researchers.Add(first);
 
             Researcher second = new Researcher("Polyakov", "Dimitri", 0.1);
-            second.AddProject(new InternationalProject("Federal Laws", ProjectType.Applied, new DateTime(2020, 1, 1), "Russia", 7));
+            second.AddProject(new InternationalProject("Federal Laws", ProjectType.Applied, new DateTime(2020, 1, 1), "Russia", 1));
             second.AddProject(new InternationalProject("Judgement Systems", ProjectType.Fundamental, new DateTime(2022, 1, 1), "USA", 1));
             second.AddProject(new LocalProject("Taxes", ProjectType.Applied, new DateTime(2018, 11, 1), 3, false));
             researchers.Add(second);
