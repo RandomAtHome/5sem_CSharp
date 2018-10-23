@@ -33,14 +33,11 @@ namespace lab1_v4
             }
         }
 
-        public IEnumerable<LocalProject> LProjectsDecreasingDuration
-        {
-            get
-            {
-                //TODO: third functionality
-                throw new NotImplementedException();
-            }
-        } 
+        public IEnumerable<LocalProject> LProjectsDecreasingDuration => from researcher in researchers
+                                                                        from project in researcher.projects
+                                                                        where project is LocalProject
+                                                                        orderby ((LocalProject)project).duration descending
+                                                                        select (LocalProject)project;
 
         public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount
         {
@@ -77,11 +74,12 @@ namespace lab1_v4
 
             Researcher second = new Researcher("Polyakov", "Dimitri", 0.1);
             second.AddProject(new InternationalProject("Federal Laws", ProjectType.Applied, new DateTime(2020, 1, 1), "Russia", 7));
-            second.AddProject(new InternationalProject("Judgement System", ProjectType.Fundamental, new DateTime(2022, 1, 1), "Russia", 1));
+            second.AddProject(new InternationalProject("Judgement Systems", ProjectType.Fundamental, new DateTime(2022, 1, 1), "USA", 1));
+            second.AddProject(new LocalProject("Taxes", ProjectType.Applied, new DateTime(2018, 11, 1), 3, false));
             researchers.Add(second);
 
             Researcher third = new Researcher("Fionov", "Alexey", 2);
-            third.AddProject(new LocalProject("Japanese lessons", ProjectType.Applied, new DateTime(2018, 10, 30), 1, false));
+            third.AddProject(new LocalProject("Japanese lessons", ProjectType.Applied, new DateTime(2018, 10, 30), 2, false));
             researchers.Add(third);
 
             Researcher slacker = new Researcher("Dou", "John", 0.0);

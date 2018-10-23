@@ -8,29 +8,36 @@ namespace lab1_v4
         static void Main(string[] args)
         {
             //defaults list showcase
-            System.Console.WriteLine("Showcase with the Default List");
+            Console.WriteLine("Showcase with the Default List");
             ResearcherList researcherList = new ResearcherList();
             researcherList.AddDefaults();
-            System.Console.WriteLine(researcherList);
-            System.Console.WriteLine();
-            System.Console.WriteLine("(1) Get earliest worldwide project ending");
-            System.Console.WriteLine(researcherList.EarliestWWEDate);
-            System.Console.WriteLine();
-            System.Console.WriteLine("(2) Get reference for the earliest project");
-            System.Console.WriteLine(researcherList.EarliestProj);
-            System.Console.WriteLine("\n");
-            System.Console.ReadKey();
+            Console.WriteLine(researcherList);
+            Console.WriteLine();
+            Console.WriteLine("(1) Get earliest worldwide project ending");
+            Console.WriteLine(researcherList.EarliestWWEDate);
+            Console.WriteLine();
+            Console.WriteLine("(2) Get reference for the earliest project");
+            Console.WriteLine(researcherList.EarliestProj);
+            Console.WriteLine();
+            Console.WriteLine("(3) Get enumerable in descending order for all local projects");
+            foreach (LocalProject localProject in researcherList.LProjectsDecreasingDuration)
+                Console.WriteLine(localProject);
+            Console.WriteLine("\n");
+            Console.ReadKey();
             //empty list showcase
-            System.Console.WriteLine("The following list will be empty!");
+            Console.WriteLine("The following list will be empty!");
             ResearcherList emptyList = new ResearcherList();
-            System.Console.WriteLine(emptyList);
-            System.Console.WriteLine();
-            System.Console.WriteLine("(1) Get earliest worldwide project ending");
-            System.Console.WriteLine(emptyList.EarliestWWEDate);
-            System.Console.WriteLine();
-            System.Console.WriteLine("(2) Check if the property returns null when all lists are empty");
-            System.Console.WriteLine(emptyList.EarliestProj is null);
-            System.Console.ReadKey();
+            Console.WriteLine(emptyList);
+            Console.WriteLine();
+            Console.WriteLine("(1) Get earliest worldwide project ending");
+            Console.WriteLine(emptyList.EarliestWWEDate);
+            Console.WriteLine();
+            Console.WriteLine("(2) Check if the property returns null when all lists are empty");
+            Console.WriteLine(emptyList.EarliestProj is null);
+            Console.WriteLine("(3) Get enumerable in descending order for all local projects");
+            foreach (LocalProject localProject in emptyList.LProjectsDecreasingDuration)
+                Console.WriteLine(localProject);
+            Console.ReadKey();
         }
     }
 }
