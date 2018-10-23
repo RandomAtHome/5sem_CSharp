@@ -44,6 +44,10 @@ namespace lab1_v4
         {
             string result = this.ToShortString() + "\n";
             result += "Projects:\n";
+            if (projects.Count == 0)
+            {
+                result += "No projects!\n";
+            }
             foreach (Project project in projects)
             {
                 result += project + "\n";

@@ -10,12 +10,6 @@ namespace lab1_v4
         {
             get
             {
-                /* 1.Cвойство типа DateTime, возвращающее первую дату окончания международного проекта
-                (минимальное значение даты окончания международных проектов, которые встречаются в списках List<Project> элементов Researcher
-                из списка List<Researcher> класса ResearcherList). Если в коллекции List<Researcher> нет элементов 
-                или ни в одном списке List<Project> нет объектов типа InternationalProject, свойство возвращает некоторое знчение по умолчанию.
-                   */
-                //TODO: Using LINQ find earliest ending worldwide project date
                 var query =  from researcher in researchers
                              from project in researcher.projects
                              where project is InternationalProject
@@ -30,6 +24,11 @@ namespace lab1_v4
             get
             {
                 //TODO: Using LINQ find earliest ending project
+                var query = from researcher in researchers
+                            from project in researcher.projects
+                            orderby project.date ascending
+                            select project;
+                return query.Count() != 0 ? query.First() : null;
                 throw new NotImplementedException();
             }
         }
@@ -81,12 +80,20 @@ namespace lab1_v4
             second.AddProject(new InternationalProject("Judgement System", ProjectType.Fundamental, new DateTime(2022, 1, 1), "Russia", 1));
             researchers.Add(second);
 
-            Researcher third = new Researcher("Fionov", "Alexey", 0.0);
+            Researcher third = new Researcher("Fionov", "Alexey", 2);
+            third.AddProject(new LocalProject("Japanese lessons", ProjectType.Applied, new DateTime(2018, 10, 30), 1, false));
             researchers.Add(third);
+
+            Researcher slacker = new Researcher("Dou", "John", 0.0);
+            researchers.Add(slacker);
             //TODO: Add minimal set of researchers viable for testing
         }
         public override string ToString()
         {
+            if (researchers.Count == 0)
+            {
+                return "List is empty!";
+            }
             string result = "";
             string delim = "\n";
             int counter = 1;
