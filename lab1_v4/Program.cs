@@ -7,6 +7,12 @@ namespace lab1_v4
     {
         static void Main(string[] args)
         {
+            ResearcherList researcherList = new ResearcherList();
+            researcherList.AddDefaults();
+            System.Console.WriteLine(researcherList);
+            System.Console.WriteLine();
+            System.Console.WriteLine(researcherList.EarliestWWEDate);
+            System.Console.ReadKey();
             //TODO: Complete third assignment
         }
     }
