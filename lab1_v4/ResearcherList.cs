@@ -1,9 +1,56 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace lab1_v4
 {
     class ResearcherList
     {
+        public DateTime EarliestWWEDate
+        {
+            get
+            {
+                //TODO: Using LINQ find earliest ending worldwide project date
+                throw new NotImplementedException();
+            }
+        }
+
+        public Project EarliestProj
+        {
+            get
+            {
+                //TODO: Using LINQ find earliest ending project
+                throw new NotImplementedException();
+            }
+        }
+
+        public IEnumerable<LocalProject> LProjectsDecreasingDuration
+        {
+            get
+            {
+                //TODO: third functionality
+                throw new NotImplementedException();
+            }
+        } 
+
+        public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount
+        {
+            get
+            {
+                //TODO: fourth functionality
+                throw new NotImplementedException();
+            }
+        }
+
+        public IEnumerable<Project> UniqueProjects
+        {
+            get
+            {
+                //TODO: fifth functionality
+                throw new NotImplementedException();
+            }
+        }
+
         private List<Researcher> researchers;
         ResearcherList(List<Researcher> researchers = null)
         {
