@@ -6,32 +6,16 @@ namespace lab1_v4
 {
     class ResearcherList
     {
-        public DateTime EarliestWWEDate
-        {
-            get
-            {
-                var query =  from researcher in researchers
-                             from project in researcher.projects
-                             where project is InternationalProject
-                             orderby project.date ascending
-                             select project.date;
-                return query.Count() != 0 ? query.First() : default(DateTime);
-            }
-        }
+        public DateTime EarliestWWEDate => (from researcher in researchers
+                                            from project in researcher.projects
+                                            where project is InternationalProject
+                                            orderby project.date ascending
+                                            select project.date).FirstOrDefault();
 
-        public Project EarliestProj
-        {
-            get
-            {
-                //TODO: Using LINQ find earliest ending project
-                var query = from researcher in researchers
-                            from project in researcher.projects
-                            orderby project.date ascending
-                            select project;
-                return query.Count() != 0 ? query.First() : null;
-                throw new NotImplementedException();
-            }
-        }
+        public Project EarliestProj => (from researcher in researchers
+                                        from project in researcher.projects
+                                        orderby project.date ascending
+                                        select project).FirstOrDefault();
 
         public IEnumerable<LocalProject> LProjectsDecreasingDuration => from researcher in researchers
                                                                         from project in researcher.projects
