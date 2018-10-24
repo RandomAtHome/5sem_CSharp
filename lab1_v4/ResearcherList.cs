@@ -17,15 +17,16 @@ namespace lab1_v4
                                         orderby project.date ascending
                                         select project).FirstOrDefault();
 
-        public IEnumerable<LocalProject> LProjectsDecreasingDuration => from researcher in researchers
+        public IEnumerable<LocalProject> LProjectsDecreasingDuration => (from researcher in researchers
                                                                         from project in researcher.projects
                                                                         where project is LocalProject
                                                                         orderby ((LocalProject)project).duration descending
-                                                                        select (LocalProject)project;
+                                                                        select (LocalProject)project).Distinct();
 
-        public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount => from researcher in researchers
-                                                                                             from project in researcher.projects
-                                                                                             where project is InternationalProject
+        public IEnumerable<IGrouping<int, InternationalProject>> GroupByParticipantsCount => from project in (from researcher in researchers
+                                                                                                              from project in researcher.projects
+                                                                                                              where project is InternationalProject
+                                                                                                              select project).Distinct()
                                                                                              group (project as InternationalProject) by (project as InternationalProject).participant_count;
 
         public IEnumerable<Project> UniqueProjects
@@ -47,7 +48,6 @@ namespace lab1_v4
         }
         public void AddDefaults()
         {
-            //TODO: Fix problem with lack of uniqueness in last 3 properties
             InternationalProject schoolSlon = new InternationalProject("School Slon", ProjectType.Fundamental, new DateTime(2019, 1, 2), "Russia", 1);
             Researcher first = new Researcher("Chukharev", "Fedor", 2.5);
             first.AddProject(new LocalProject("Hometask", ProjectType.Applied, new DateTime(2018, 11, 6), 1, false));
@@ -59,6 +59,7 @@ namespace lab1_v4
             second.AddProject(new InternationalProject("Federal Laws", ProjectType.Applied, new DateTime(2020, 1, 1), "Russia", 2));
             second.AddProject(new InternationalProject("Judgement Systems", ProjectType.Fundamental, new DateTime(2022, 1, 1), "USA", 1));
             second.AddProject(new LocalProject("Taxes", ProjectType.Applied, new DateTime(2018, 11, 1), 3, false));
+            second.AddProject(new LocalProject("Hometask", ProjectType.Applied, new DateTime(2018, 11, 6), 1, false));
             researchers.Add(second);
 
             Researcher third = new Researcher("Fionov", "Alexey", 2);
