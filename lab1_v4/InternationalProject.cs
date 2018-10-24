@@ -18,9 +18,6 @@ namespace lab1_v4
             return base.ToString() + delim + "Country host: " + country_host + delim + "Total participants: " + participant_count;
         }
 
-        int IComparable<InternationalProject>.CompareTo(InternationalProject other)
-        {
-            return participant_count - other.participant_count;
-        }
+        int IComparable<InternationalProject>.CompareTo(InternationalProject other) => participant_count - other.participant_count;
     }
 }

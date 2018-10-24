@@ -9,12 +9,12 @@ namespace lab1_v4
         public DateTime EarliestWWEDate => (from researcher in researchers
                                             from project in researcher.projects
                                             where project is InternationalProject
-                                            orderby project.date ascending
-                                            select project.date).FirstOrDefault();
+                                            orderby project.Date ascending
+                                            select project.Date).FirstOrDefault();
 
         public Project EarliestProj => (from researcher in researchers
                                         from project in researcher.projects
-                                        orderby project.date ascending
+                                        orderby project.Date ascending
                                         select project).FirstOrDefault();
 
         public IEnumerable<LocalProject> LProjectsDecreasingDuration => (from researcher in researchers
@@ -82,9 +82,6 @@ namespace lab1_v4
             }
             return result;
         }
-        public override int GetHashCode()
-        {
-            return researchers.GetHashCode();
-        }
+        public override int GetHashCode() => researchers.GetHashCode();
     }
 }

@@ -1,49 +1,41 @@
 ﻿using System;
 
-namespace lab1_v4 {
+namespace lab1_v4
+{
     public class Project : IComparable<Project>
     {
-        public string theme { get; set; }
-        public ProjectType type { get; set; }
-        public DateTime date { get; set; }
+        public string Theme { get; set; }
+        public ProjectType Type { get; set; }
+        public DateTime Date { get; set; }
 
         public Project(string theme = "", ProjectType type = ProjectType.Applied, DateTime date = new DateTime())
         {
-            this.theme = theme;
-            this.type = type;
-            this.date = date;   
+            Theme = theme;
+            Type = type;
+            Date = date;
 	    }
 
         public override string ToString()
         {
             string delim = "\n";
-            return  "Theme: " + theme + delim +
-                    "Type: " + type + delim +
-                    "Ends on: " + date.ToShortDateString();
+            return  "Theme: " + Theme + delim +
+                    "Type: " + Type + delim +
+                    "Ends on: " + Date.ToShortDateString();
         }
-        public override int GetHashCode()
-        {
-            return date.GetHashCode() + theme.GetHashCode() + (int)type;
-        }
+        public override int GetHashCode() => Date.GetHashCode() + Theme.GetHashCode() + (int)Type;
+
         public override bool Equals(object obj)
         {
-            if (Object.ReferenceEquals(obj, null))
+            if (obj == null || GetType() != obj.GetType())
+            {
                 return false;
-            return this.date.Equals(((Project)obj).date) && this.theme.Equals(((Project)obj).theme) && this.type.Equals(((Project)obj).type); 
+            }
+            return Date.Equals((obj as Project).Date) && Theme.Equals((obj as Project).Theme) && Type.Equals((obj as Project).Type); 
         }
 
-        int IComparable<Project>.CompareTo(Project other)
-        {
-            throw new NotImplementedException();
-        }
+        public int CompareTo(Project other) => Date.CompareTo(other.Date);
 
-        public static bool operator ==(Project a, Project b)
-        {
-            return Object.ReferenceEquals(a, b) || (!Object.ReferenceEquals(a, null) && a.Equals(b));
-        }
-        public static bool operator !=(Project a, Project b)
-        {
-            return !(a == b);
-        }
+        public static bool operator ==(Project a, Project b) => ReferenceEquals(a, b) || (!(a is null) && a.Equals(b));
+        public static bool operator !=(Project a, Project b) => !(a == b);
     }
 }

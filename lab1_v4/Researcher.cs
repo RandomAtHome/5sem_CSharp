@@ -55,11 +55,8 @@ namespace lab1_v4
             return result;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return projects.GetEnumerator();
-        }
-       
+        public IEnumerator GetEnumerator() => projects.GetEnumerator();
+
         public IEnumerable GetIntBigProjects()
         {
             foreach (Project i in projects) {

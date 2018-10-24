@@ -5,7 +5,7 @@ namespace lab1_v4
     public enum ProjectType { Applied, Fundamental };
     class Program
     {
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
             //defaults list showcase
             Console.WriteLine("Showcase with the Default List");
@@ -65,6 +65,7 @@ namespace lab1_v4
             foreach (Project project in emptyList.RepeatingProjects)
                 Console.WriteLine(project + "\n");
             Console.ReadKey();
+            return 0;
         }
     }
 }
