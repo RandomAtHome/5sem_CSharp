@@ -29,28 +29,24 @@ namespace lab1_v4
                                                                                                               select project).Distinct()
                                                                                              group (project as InternationalProject) by (project as InternationalProject).participant_count;
 
-        public IEnumerable<Project> UniqueProjects
-        {
-            get
-            {
-                //TODO: fifth functionality
-                throw new NotImplementedException();
-            }
-        }
+        public IEnumerable<Project> RepeatingProjects => from researcher in researchers
+                                                         from project in researcher.projects
+                                                         group project by project.GetHashCode() into repeating
+                                                         where repeating.Count() > 1
+                                                         select repeating.First();
 
         private List<Researcher> researchers;
         public ResearcherList(List<Researcher> researchers = null)
         {
             if (researchers == null)
                 researchers = new List<Researcher>();
-
             this.researchers = researchers;
         }
         public void AddDefaults()
         {
             InternationalProject schoolSlon = new InternationalProject("School Slon", ProjectType.Fundamental, new DateTime(2019, 1, 2), "Russia", 1);
             Researcher first = new Researcher("Chukharev", "Fedor", 2.5);
-            first.AddProject(new LocalProject("Hometask", ProjectType.Applied, new DateTime(2018, 11, 6), 1, false));
+            first.AddProject(new LocalProject("Hometask", ProjectType.Applied, new DateTime(2018, 11, 6), 10, false));
             first.AddProject(new InternationalProject("Feunman Integrals", ProjectType.Applied, new DateTime(2019, 2, 19), "Russia", 2));
             first.AddProject(schoolSlon);
             researchers.Add(first);
@@ -69,7 +65,6 @@ namespace lab1_v4
 
             Researcher slacker = new Researcher("Dou", "John", 0.0);
             researchers.Add(slacker);
-            //TODO: Add minimal set of researchers viable for testing
         }
         public override string ToString()
         {

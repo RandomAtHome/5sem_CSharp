@@ -35,16 +35,19 @@ namespace lab1_v4
                     Console.WriteLine(project + "\n");
                 Console.WriteLine();
             }
+            Console.WriteLine();
+            Console.ReadKey();
+            Console.WriteLine("(5) Get enumerable for projects appearing in different lists");
+            foreach (Project project in researcherList.RepeatingProjects)             
+                    Console.WriteLine(project + "\n");
             Console.WriteLine("\n");
             Console.ReadKey();
             //empty list showcase
             Console.WriteLine("The following list will be empty!");
             ResearcherList emptyList = new ResearcherList();
             Console.WriteLine(emptyList);
-            Console.WriteLine();
             Console.WriteLine("(1) Get earliest worldwide project ending");
             Console.WriteLine(emptyList.EarliestWWEDate);
-            Console.WriteLine();
             Console.WriteLine("(2) Check if the property returns null when all lists are empty");
             Console.WriteLine(emptyList.EarliestProj is null);
             Console.WriteLine("(3) Get enumerable in descending order for all local projects");
@@ -58,6 +61,9 @@ namespace lab1_v4
                     Console.WriteLine(project);
                 Console.WriteLine();
             }
+            Console.WriteLine("(5) Get enumerable for projects appearing in different lists");
+            foreach (Project project in emptyList.RepeatingProjects)
+                Console.WriteLine(project + "\n");
             Console.ReadKey();
         }
     }
